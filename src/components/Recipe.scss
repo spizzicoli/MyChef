@@ -1,0 +1,46 @@
+.recipe {
+    a {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        z-index: 30;
+    }
+
+    .recipe__challenge {
+        display: flex;
+        align-items: center;
+
+        .recipe__color {
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background: lawngreen;
+        }
+
+        p {
+            margin: 0 0 0 8px;
+        }
+    }
+
+    ion-card-header {
+        padding-bottom: 5px;
+    }
+
+    ion-card-subtitle {
+        display: flex;
+
+        .recipe__time {
+            display: flex;
+            align-items: center;
+            margin-right: 18px;
+        }
+
+        ion-icon {
+            width: 20px;
+            height: 20px;
+            margin-right: 5px;
+        }
+    }
+}

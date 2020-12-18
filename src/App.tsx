@@ -1,11 +1,12 @@
 import React from 'react'
 import { Route, Redirect, RouteComponentProps } from 'react-router-dom'
 import { IonRouterOutlet, IonPage, IonTabs, IonTabBar, IonTabButton, IonIcon, IonLabel } from '@ionic/react'
-import { home, apps } from 'ionicons/icons'
+import { home, apps, restaurantOutline, heartOutline } from 'ionicons/icons'
 import { Helmet } from 'react-helmet'
 import Home from './pages/Home'
 import User from './pages/User'
-import About from './pages/About'
+import Recipes from './pages/Recipes'
+import FavouriteRecipes from './pages/FavouriteRecipes'
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css'
@@ -25,26 +26,30 @@ import '@ionic/react/css/display.css'
 
 /* Theme variables */
 import './theme/variables.css'
+import RecipeDetails from './pages/RecipeDetails'
 
 const App: React.FunctionComponent<RouteComponentProps> = props => {
   // hide the tab bar when not on home or about page
-  const display = props.location.pathname.match(/home$|about$/g) ? 'flex' : 'none'
+  //const display = props.location.pathname.match(/home$|about$/g) ? 'flex' : 'none'
 
   return (
     <IonPage id="main">
-      {/*using Helmet to add the css to the head*/}
+      {/*using Helmet to add the css to the head
       <Helmet>
         <style type="text/css">{`
-        ion-tab-bar {
-            display: ${display};
-        }
-    `}</style>
+          ion-tab-bar {
+              display: ${display};
+          }
+        `}</style>
       </Helmet>
+      */}
       <IonTabs>
         <IonRouterOutlet>
           <Route path="/home" component={Home} exact />
           <Route path="/home/:user" component={User} exact />
-          <Route path="/about" component={About} exact />
+          <Route path="/recipes" component={Recipes} exact />
+          <Route path="/favourite-recipes" component={FavouriteRecipes} exact />
+          <Route path="/recipe-details" component={RecipeDetails} />
           <Redirect exact from="/" to="/home" />
         </IonRouterOutlet>
 
@@ -53,9 +58,13 @@ const App: React.FunctionComponent<RouteComponentProps> = props => {
             <IonIcon icon={home} />
             <IonLabel>Home</IonLabel>
           </IonTabButton>
-          <IonTabButton tab="about" href="/about">
-            <IonIcon icon={apps} />
-            <IonLabel>About</IonLabel>
+          <IonTabButton tab="recipes" href="/recipes">
+            <IonIcon icon={restaurantOutline} />
+            <IonLabel>Recipes</IonLabel>
+          </IonTabButton>
+          <IonTabButton tab="favourite recipes" href="/favourite-recipes">
+            <IonIcon icon={heartOutline} />
+            <IonLabel>Favourite Recipes</IonLabel>
           </IonTabButton>
         </IonTabBar>
       </IonTabs>
