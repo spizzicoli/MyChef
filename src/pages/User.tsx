@@ -10,7 +10,7 @@ const User: React.FC<RouteComponentProps> = ({ location }) => {
       <IonHeader>
         <IonToolbar>
           <IonButtons slot="start">
-            <IonBackButton defaultHref="/home" />
+            <IonBackButton defaultHref="/home" text="" />
           </IonButtons>
           <IonTitle>{state?.name}</IonTitle>
         </IonToolbar>

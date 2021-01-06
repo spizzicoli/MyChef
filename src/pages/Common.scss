@@ -1,0 +1,74 @@
+/* Ion Back Button */
+ion-back-button {
+    --color: #202020;
+}
+
+/* Page Header and Title */
+ion-header {
+    height: 50px;
+
+    ion-toolbar {
+        height: 100%;
+        display: flex;
+        --border-color: #fff;
+    }
+
+    ion-title {
+        font-family: sans-serif;
+        font-size: 22px;
+        font-weight: 600;
+        line-height: normal;
+        margin-bottom: 0;
+    }
+}
+
+
+/* Pagina RecipeDetails */
+.recipe-details {
+    .recipe-details__image {
+        position: relative;
+
+        img {
+            width: 100%;
+        }
+    }
+
+    .recipe-details__info {
+        display: flex;
+        justify-content: space-around;
+        width: 100%;
+        margin: 10px 0 20px;
+
+        > p {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 0;
+
+            ion-icon {
+                width: 25px;
+                height: 25px;
+                background: #fff;
+                padding: 10px;
+                border-radius: 10%;
+            }
+        }
+    }
+
+    .recipe-details__description {
+        margin-top: 15px;
+        padding: 0 15px;
+
+        > h2 {
+            font-family: sans-serif;
+            font-size: 40px;
+            font-weight: 600;
+            line-height: 32px;
+            margin-bottom: 0;
+        }
+
+        > p {
+            margin-top: 10px;
+        }
+    }
+}

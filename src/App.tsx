@@ -1,8 +1,7 @@
 import React from 'react'
 import { Route, Redirect, RouteComponentProps } from 'react-router-dom'
 import { IonRouterOutlet, IonPage, IonTabs, IonTabBar, IonTabButton, IonIcon, IonLabel } from '@ionic/react'
-import { home, apps, restaurantOutline, heartOutline } from 'ionicons/icons'
-import { Helmet } from 'react-helmet'
+import { home, restaurantOutline, heartOutline } from 'ionicons/icons'
 import Home from './pages/Home'
 import User from './pages/User'
 import Recipes from './pages/Recipes'
@@ -28,7 +27,7 @@ import '@ionic/react/css/display.css'
 import './theme/variables.css'
 import RecipeDetails from './pages/RecipeDetails'
 
-const App: React.FunctionComponent<RouteComponentProps> = props => {
+const App: React.FunctionComponent<RouteComponentProps> = () => {
   // hide the tab bar when not on home or about page
   //const display = props.location.pathname.match(/home$|about$/g) ? 'flex' : 'none'
 
@@ -49,7 +48,7 @@ const App: React.FunctionComponent<RouteComponentProps> = props => {
           <Route path="/home/:user" component={User} exact />
           <Route path="/recipes" component={Recipes} exact />
           <Route path="/favourite-recipes" component={FavouriteRecipes} exact />
-          <Route path="/recipe-details" component={RecipeDetails} />
+          <Route path="/recipe-details/:id" component={RecipeDetails} />
           <Redirect exact from="/" to="/home" />
         </IonRouterOutlet>
 
