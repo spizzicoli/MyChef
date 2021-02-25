@@ -1,7 +1,6 @@
 import { IonBackButton, IonButtons, IonContent, IonHeader, IonIcon, IonLabel, IonPage, IonTitle, IonToolbar } from '@ionic/react'
 import { cashOutline, happyOutline, hourglassOutline } from 'ionicons/icons'
 import React, { useEffect, useState } from 'react'
-import { store } from '..';
 
 import './Common.scss'
 
@@ -9,10 +8,6 @@ const RecipeDetails: React.FC = () => {
   const API_KEY = "48dfa29ba0a34098ab1b0b70539db70a";
   const idRecipe: string = location.pathname.split(':')[1];
   const [recipeDetails, setRecipeDetails] = useState<any>();
-
-  const recipeToShow = store.getState().filter((recipe) => {
-    return recipe.idRecipe === parseInt(idRecipe);
-  });
 
   // GET method implementation
   async function getData(url = '') {
@@ -46,7 +41,7 @@ const RecipeDetails: React.FC = () => {
     <IonPage>
       <IonHeader>
         <IonToolbar>
-          <IonButtons>
+          <IonButtons slot="start">
             <IonBackButton defaultHref="/recipes" text="" />
           </IonButtons>
           <IonTitle>Recipes Details</IonTitle>

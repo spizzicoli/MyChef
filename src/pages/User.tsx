@@ -3,7 +3,7 @@ import React from 'react'
 import { RouteComponentProps } from 'react-router'
 
 const User: React.FC<RouteComponentProps> = ({ location }) => {
-  const state = location.state as { name: string }
+  // state = location.state as { name: string }
 
   return (
     <IonPage>
@@ -12,11 +12,11 @@ const User: React.FC<RouteComponentProps> = ({ location }) => {
           <IonButtons slot="start">
             <IonBackButton defaultHref="/home" text="" />
           </IonButtons>
-          <IonTitle>{state?.name}</IonTitle>
+          <IonTitle>Home{/*state?.name*/}</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent className="ion-padding">
-        <p>Hello {state?.name}</p>
+        <p>Hello darkness my old friend...{/*state?.name*/}</p>
       </IonContent>
     </IonPage>
   )

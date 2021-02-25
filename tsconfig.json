@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "target": "es5",
-    "module": "commonjs",
+    "module": "esnext",
     "jsx": "react",
     "strict": true,
     "noImplicitAny": false,
@@ -10,6 +10,22 @@
     "allowUnreachableCode": false,
     "strictPropertyInitialization": false,
     "experimentalDecorators": true,
-    "lib": ["dom", "es2015.promise", "es5"]
-  }
+    "lib": [
+      "dom",
+      "es2015.promise",
+      "es5"
+    ],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "allowSyntheticDefaultImports": true,
+    "forceConsistentCasingInFileNames": true,
+    "noFallthroughCasesInSwitch": true,
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+  },
+  "include": [
+    "src",
+    "public"
+  ]
 }

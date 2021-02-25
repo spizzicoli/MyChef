@@ -6,10 +6,17 @@ import Recipe from '../components/Recipe/Recipe'
 
 const About: React.FC = () => {
   const recipes = store.getState()[0];
-  const favRecipes = recipes.filter((recipe) => {
-    return recipe.favourite;
-  });
-  const emptyFavRecipes = favRecipes.length > 0 ? false : true;
+  let favRecipes,
+      emptyFavRecipes;
+
+  if (recipes.length > 0) {
+    favRecipes = recipes.filter((recipe) => {
+      return recipe.favourite;
+    });
+    emptyFavRecipes = favRecipes.length > 0 ? false : true;
+  } else {
+    emptyFavRecipes = true;
+  }
 
   return (
     <IonPage>

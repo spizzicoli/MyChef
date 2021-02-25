@@ -1,11 +1,12 @@
 import React from 'react'
 import { Route, Redirect, RouteComponentProps } from 'react-router-dom'
 import { IonRouterOutlet, IonPage, IonTabs, IonTabBar, IonTabButton, IonIcon, IonLabel } from '@ionic/react'
-import { home, restaurantOutline, heartOutline } from 'ionicons/icons'
+import { home, restaurantOutline, heartOutline, fastFoodOutline } from 'ionicons/icons'
 import Home from './pages/Home'
 import User from './pages/User'
 import Recipes from './pages/Recipes'
 import FavouriteRecipes from './pages/FavouriteRecipes'
+import Pantry from './pages/Pantry'
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css'
@@ -49,6 +50,7 @@ const App: React.FunctionComponent<RouteComponentProps> = () => {
           <Route path="/recipes" component={Recipes} exact />
           <Route path="/favourite-recipes" component={FavouriteRecipes} exact />
           <Route path="/recipe-details/:id" component={RecipeDetails} />
+          <Route path="/pantry" component={Pantry} />
           <Redirect exact from="/" to="/home" />
         </IonRouterOutlet>
 
@@ -64,6 +66,10 @@ const App: React.FunctionComponent<RouteComponentProps> = () => {
           <IonTabButton tab="favourite recipes" href="/favourite-recipes">
             <IonIcon icon={heartOutline} />
             <IonLabel>Favourite Recipes</IonLabel>
+          </IonTabButton>
+          <IonTabButton tab="pantry" href="/pantry">
+            <IonIcon icon={fastFoodOutline} />
+            <IonLabel>Pantry</IonLabel>
           </IonTabButton>
         </IonTabBar>
       </IonTabs>
