@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server --config webpack/webpack.dev.js --watch",
-    "build": "webpack --config webpack/webpack.prod.js"
+    "start": "ionic serve",
+    "android": "ionic cap copy android && ionic cap update android && ionic cap run android"
   },
   "author": "Yannick Deubel",
   "license": "MIT",
@@ -34,21 +34,15 @@
     "@types/react-dom": "^16.9.6",
     "@types/react-router": "^5.1.5",
     "@types/react-router-dom": "^5.1.3",
-    "clean-webpack-plugin": "^1.0.1",
     "css-loader": "^3.4.2",
     "file-loader": "^4.3.0",
-    "html-webpack-plugin": "^4.0.4",
     "prettier": "^1.19.1",
     "react-scripts": "4.0.1",
     "sass": "^1.30.0",
     "sass-loader": "^10.1.0",
     "style-loader": "^1.1.3",
     "ts-loader": "^5.4.5",
-    "typescript": "^3.8.3",
-    "webpack": "^4.44.2",
-    "webpack-cli": "^3.3.11",
-    "webpack-dev-server": "3.11.0",
-    "webpack-merge": "^4.2.2"
+    "typescript": "^3.8.3"
   },
   "browserslist": {
     "production": [

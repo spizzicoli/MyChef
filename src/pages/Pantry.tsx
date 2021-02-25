@@ -1,7 +1,6 @@
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonButtons, IonBackButton, IonItem, IonItemOption, IonItemOptions, IonItemSliding, IonLabel, IonAvatar, IonButton } from '@ionic/react'
+import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonButtons, IonBackButton, IonItem, IonItemOption, IonItemOptions, IonItemSliding, IonLabel, IonAvatar } from '@ionic/react'
 import React from 'react'
 import { RouteComponentProps } from 'react-router'
-import { Plugins } from '@capacitor/core'
 
 const User: React.FC<RouteComponentProps> = ({ location }) => {
   // state = location.state as { name: string }
