@@ -1,6 +1,7 @@
-import { IonBackButton, IonButtons, IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react'
+import {IonContent, IonPage } from '@ionic/react'
 import React, { useEffect, useState } from 'react'
 import Recipe from '../components/Recipe/Recipe'
+import FoodTag from '../components/FoodTag/FoodTag'
 import lineClamp from 'line-clamp'
 import { setInitialState, store } from '..'
 
@@ -50,18 +51,10 @@ const About: React.FC = () => {
   }, 500);
   
   return (
-    <IonPage>
-      <IonHeader>
-        <IonToolbar>
-          <IonButtons slot="start">
-            <IonBackButton defaultHref="home" text="" />
-          </IonButtons>
-
-          <IonTitle>Recipes</IonTitle>
-        </IonToolbar>
-      </IonHeader>
+    <IonPage className="recipes-page">
       <IonContent className="ion-padding">
-        <p>Here you can find all Recipes you could imagine</p>
+        <p className="page-title">Cosa cucinerai <br/> oggi?</p>
+        <FoodTag></FoodTag>
         { recipeList && 
           recipeList.map((recipe, key) => {
             // console.log('\n\nRICETTE: ', recipe)

@@ -1,2 +1,0 @@
-(this["webpackJsonpionic-react-typescript-starter"]=this["webpackJsonpionic-react-typescript-starter"]||[]).push([[3],{197:function(t,n,e){"use strict";e.r(n),e.d(n,"startStatusTap",(function(){return r}));var i=e(21),r=function(){var t=window;t.addEventListener("statusTap",(function(){Object(i.h)((function(){var n=t.innerWidth,e=t.innerHeight,r=document.elementFromPoint(n/2,e/2);if(r){var c=r.closest("ion-content");c&&c.componentOnReady().then((function(){Object(i.n)((function(){return c.scrollToTop(300)}))}))}}))}))}}}]);
-//# sourceMappingURL=3.7dcb7ad3.chunk.js.map

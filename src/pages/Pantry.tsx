@@ -1,6 +1,7 @@
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonButtons, IonBackButton, IonItem, IonItemOption, IonItemOptions, IonItemSliding, IonLabel, IonAvatar, IonButton, IonText } from '@ionic/react'
+import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonButtons, IonBackButton, IonItem, IonItemOption, IonItemOptions, IonItemSliding, IonLabel, IonAvatar, IonButton, IonText, IonList } from '@ionic/react'
 import React, { useEffect, useState } from 'react'
 import { RouteComponentProps } from 'react-router'
+import lineClamp from 'line-clamp'
 import { BarcodeScanner } from '@ionic-native/barcode-scanner'
 import { HTTP, HTTPResponse } from '@ionic-native/http'
 
@@ -9,24 +10,22 @@ const User: React.FC<RouteComponentProps> = ({ location }) => {
   const [productFound, setProductFound] = useState(false);
   const [productList, setProductList] = useState<any>([]);
   const API_KEY = 'a47ug7ubnjhujwuryotbizrkvfyhz5';
+  const slidingItem = document.getElementsByClassName('sliding-item-line-clamp');
 
   const scanCode = async () => {
-    // sforo il limite mensile di chiamate ho mockuppato una chiamata la uso staticamente
+    /* sforo il limite mensile di chiamate ho mockuppato una chiamata la uso staticamente
     const data = await BarcodeScanner.scan();
 
-    // alert(data.text);
-    // alert(`https://api.barcodelookup.com/v2/products?barcode=${data.text}&formatted=y&key=${API_KEY}`);
     getData(`https://api.barcodelookup.com/v2/products?barcode=${data.text}&formatted=y&key=${API_KEY}`)
     .then(data => {
-      // alert('data che arriva nel then');
-      // alert(JSON.stringify(data));
       if (data) {
         setProductFound(true);
         addProductScannedToList(data.products);
       }
-    })
+    });
+    */
    
-    /*
+    // Mockup chiamata API
     const objectScanned = {
       "products": [
         {
@@ -54,7 +53,7 @@ const User: React.FC<RouteComponentProps> = ({ location }) => {
           "nutrition_facts": "",
           "color": "",
           "format": "",
-          "package_quantity": "",
+          "package_quantity": "2",
           "size": "",
           "length": "",
           "width": "",
@@ -103,10 +102,9 @@ const User: React.FC<RouteComponentProps> = ({ location }) => {
 
     setProductFound(true);
     addProductScannedToList(objectScanned.products);
-    */
   };
 
-  // GET method implementation
+  /* GET method implementation
   const getData = async (url = '') => {
     HTTP.setHeader('*', 'Content-Type', 'application/json');
     HTTP.setDataSerializer("json");
@@ -114,16 +112,32 @@ const User: React.FC<RouteComponentProps> = ({ location }) => {
       method: 'get',
       responseType: 'json'
     });
-    // alert('response');
-    // alert(response.data);
     return response.data;
   }
+  */
 
   const addProductScannedToList = async (objectScanned) => {
     for (const key in objectScanned) {
       if (Object.prototype.hasOwnProperty.call(objectScanned, key)) {
         const element = objectScanned[key];
-        setProductList([...productList, element]);
+
+        // se il barcode_number è già presente aumento la quantità
+        const existingProducts = productList.findIndex((productInList) => {
+          if (productInList.barcode_number === element.barcode_number) {
+            const newQuantity = +element.package_quantity || 1;
+            const oldQuantity = +productInList.package_quantity || 1;
+            productInList.package_quantity = oldQuantity + newQuantity;
+            return true;
+          }
+        });
+
+        if (existingProducts !== -1) {
+          console.log('\n il prodotto esisteva gia, quantity aggiornata: ', existingProducts);
+          setProductList([...productList]);
+        } else {
+          console.log('\n il prodotto NON esisteva, aggiunto: ', existingProducts);
+          setProductList([...productList, element]);
+        }
       }
     }
   }
@@ -135,9 +149,21 @@ const User: React.FC<RouteComponentProps> = ({ location }) => {
     setProductList(indexItem);
   }
 
+  let slidingItemLoaded = setInterval(() => {
+    if (slidingItem.length > 0) {
+      clearInterval(slidingItemLoaded);
+      for (const key in slidingItem) {
+        if (Object.prototype.hasOwnProperty.call(slidingItem, key)) {
+          const elem = slidingItem[key];
+          lineClamp(elem, 2);
+        }
+      }
+    }
+  }, 100);
+
   return (
-    <IonPage>
-      <IonHeader>
+    <IonPage className="pantry-page">
+      <IonHeader mode="ios">
         <IonToolbar>
           <IonButtons slot="start">
             <IonBackButton defaultHref="/home" text="" />
@@ -146,33 +172,38 @@ const User: React.FC<RouteComponentProps> = ({ location }) => {
         </IonToolbar>
       </IonHeader>
       <IonContent className="ion-padding">
-        {productList.length > 0 && !productFound &&
-          <IonLabel>Il prodotto scansionato non è ancora nel database.</IonLabel>
-        }
+        <IonList lines="none">
+          {productList.length > 0 && !productFound &&
+            <IonLabel>Il prodotto scansionato non è ancora nel database.</IonLabel>
+          }
 
-        {productList.length === 0 &&
-          <IonLabel>Non hai ancora nessun prodotto nella dispensa.</IonLabel>
-        }
+          {productList.length === 0 &&
+            <IonLabel>Non hai ancora nessun prodotto nella dispensa.</IonLabel>
+          }
 
-        {productList && 
-          productList.map((element, key) => {
-            return (
-              <IonItemSliding key={key}>
-                <IonItem>
-                  <IonAvatar slot="start">
+          {productList && 
+            productList.map((element, key) => {
+              return (
+                <IonItemSliding key={key}>
+                  <IonItem>
                     <img src={element.images[0]} />
-                  </IonAvatar>
-                  <IonLabel>{element.product_name}</IonLabel>
-                </IonItem>
-                <IonItemOptions side="end">
-                  <IonItemOption onClick={() => removeProductFromList(element.barcode_number)}>Remove</IonItemOption>
-                </IonItemOptions>
-              </IonItemSliding>
-            )
-          })
-        }
-
-        <IonButton onClick={scanCode} color="primary">Scan</IonButton>
+                    <div className="product__info">
+                      <IonLabel className="product__title">{element.product_name}</IonLabel>
+                      <IonLabel className="product__quantity">x {element.package_quantity ? element.package_quantity : 1}</IonLabel>
+                      <IonText>
+                        <p className="sliding-item-line-clamp">{element.description}</p>
+                      </IonText>
+                    </div>
+                  </IonItem>
+                  <IonItemOptions side="end">
+                    <IonItemOption onClick={() => removeProductFromList(element.barcode_number)}>Remove</IonItemOption>
+                  </IonItemOptions>
+                </IonItemSliding>
+              )
+            })
+          }
+        </IonList>
+        <button onClick={scanCode}>Scan</button>
       </IonContent>
     </IonPage>
   )

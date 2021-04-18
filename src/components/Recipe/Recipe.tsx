@@ -47,14 +47,14 @@ const Recipe: React.FC<RecipeInterface> = props => {
       <Link className="recipe__link" to={urlRecipe}></Link>
       <div className="recipe__img">
         <img src={props.imgUrl} alt="recipe-img" />
-        <IonItem className={`recipe__favourite-icon`} onClick={toggleToFavourite} type="button">
+        <div className={`recipe__favourite-icon`} onClick={toggleToFavourite}>
           {isFavourite &&
             <Emoji symbol="💛" label="favourite" />
           }
           {!isFavourite &&
             <Emoji symbol="🖤" label="not-favourite" />
           }
-        </IonItem>
+        </div>
       </div>
 
       <IonCardHeader>

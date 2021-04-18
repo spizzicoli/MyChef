@@ -27,10 +27,13 @@ import '@ionic/react/css/display.css'
 /* Theme variables */
 import './theme/variables.css'
 import RecipeDetails from './pages/RecipeDetails'
+import { StatusBarExample } from './pages/StatusBar'
 
 const App: React.FunctionComponent<RouteComponentProps> = () => {
   // hide the tab bar when not on home or about page
   //const display = props.location.pathname.match(/home$|about$/g) ? 'flex' : 'none'
+  const statusBar = new StatusBarExample;
+  statusBar.changeStatusBar();
 
   return (
     <IonPage id="main">
