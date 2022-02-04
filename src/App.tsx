@@ -68,7 +68,7 @@ const App: React.FunctionComponent<RouteComponentProps> = () => {
           </IonTabButton>
           <IonTabButton tab="favourite recipes" href="/favourite-recipes">
             <IonIcon icon={heartOutline} />
-            <IonLabel>Favourite Recipes</IonLabel>
+            <IonLabel>Favourite</IonLabel>
           </IonTabButton>
           <IonTabButton tab="pantry" href="/pantry">
             <IonIcon icon={fastFoodOutline} />

@@ -1,6 +1,6 @@
 import { IonCard, IonCardHeader, IonCardSubtitle, IonCardTitle, IonCardContent, IonIcon, IonLabel, IonItem } from '@ionic/react'
 import { stopwatchOutline } from 'ionicons/icons'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { store, addFavourite, removeFavourite } from '../..'
 import Emoji from '../Emoji/Emoji'
@@ -20,9 +20,9 @@ interface RecipeInterface {
 const Recipe: React.FC<RecipeInterface> = props => {
   const urlRecipe: string = `/recipe-details/:${props.idRecipe}`;
   const [isFavourite, setIsFavourite] = useState<boolean>(props.favourite || false);
+  const [recipes, setRecipes] = useState(store.getState());
 
   const toggleToFavourite = () => {
-    const recipes = store.getState()[0];
     const payload = props.idRecipe;
     const recipeToChange = recipes.filter((recipe) => {
       return recipe.id === payload;

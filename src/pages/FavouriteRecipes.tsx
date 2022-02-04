@@ -4,12 +4,12 @@ import { store } from '..'
 import Emoji from '../components/Emoji/Emoji'
 import Recipe from '../components/Recipe/Recipe'
 
-const About: React.FC = () => {
+const FavouriteRecipes: React.FC = () => {
   const recipes = store.getState()[0];
   let favRecipes,
       emptyFavRecipes;
 
-  if (recipes.length > 0) {
+  if (recipes && recipes.length > 0) {
     favRecipes = recipes.filter((recipe) => {
       return recipe.favourite;
     });
@@ -65,4 +65,4 @@ const About: React.FC = () => {
   )
 }
 
-export default About
+export default FavouriteRecipes

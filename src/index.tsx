@@ -51,7 +51,7 @@ const rootReducer = function (state, action) {
 
   switch (action.type) {
     case "SET_INITIAL_STATE":
-      // console.log('\nvecchio stato: ', state, '\nnuovo stato: ', newState, '\naction: ', action);
+      console.log('\nvecchio stato: ', state, '\nnuovo stato: ', newState, '\naction: ', action);
       return newState;
 
     case "ADD_FAVOURITE":
@@ -60,7 +60,7 @@ const rootReducer = function (state, action) {
       });
       recipeToUpdate[0].favourite = true;
 
-      // console.log('\nvecchio stato: ', state, '\nnuovo stato: ', newState, '\naction: ', action);
+      console.log('\nvecchio stato: ', state, '\nnuovo stato: ', newState, '\naction: ', action);
       return newState;
 
     case "REMOVE_FAVOURITE":
@@ -69,7 +69,7 @@ const rootReducer = function (state, action) {
       });
       recipeToUpdate[0].favourite = false;
 
-      // console.log('\nvecchio stato: ', state, '\nnuovo stato: ', newState, '\naction: ', action);
+      console.log('\nvecchio stato: ', state, '\nnuovo stato: ', newState, '\naction: ', action);
       return newState;
 
     default:

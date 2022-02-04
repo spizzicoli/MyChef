@@ -1,7 +1,11 @@
 .recipe {
+    position: relative;
     margin-left: 0;
     margin-right: 0;
-    margin-bottom: 35px;
+    padding-top: 150px;
+    overflow: visible;
+    width: 90%;
+    left: 5%;
 
     .recipe__link {
         position: absolute;
@@ -13,19 +17,29 @@
     }
 
     .recipe__img {
-        position: relative;
+        position: absolute;
+        top: -55px;
+        z-index: 90;
+
+        img {
+            width: 50%;
+            margin-left: 25%;
+            box-shadow: 0px 0px 15px 2px #c3c3c3;
+            border-radius: 50%;
+        }
 
         .recipe__favourite-icon {
-            background: #ffffff66;
-            border-radius: 50%;
+            background: #c3c3c3;
+            border-bottom-left-radius: 4px;
+            border-top-right-radius: 4px;
             width: 45px;
             height: 45px;
             position: absolute;
             display: flex;
             align-items: center;
             justify-content: center;
-            bottom: 10px;
-            right: 9px;
+            top: 55px;
+            right: 0;
             z-index: 40;
             box-sizing: border-box;
             
@@ -41,15 +55,16 @@
 
     ion-card-header {
         padding-bottom: 5px;
+        margin-top: -45px;
 
         ion-card-title {
-            line-height: 28px;
+            font-size: 26px;
+            margin-bottom: 8px;
         }
     }
 
     ion-card-subtitle {
         display: flex;
-        margin-top: 10px;
 
         .recipe__time {
             display: flex;
@@ -58,13 +73,23 @@
         }
 
         ion-icon {
-            width: 20px;
-            height: 20px;
+            width: 15px;
+            height: 15px;
             margin-right: 5px;
+        }
+
+        ion-label {
+            font-size: 12px;
         }
     }
 
+    ion-card-content {
+        margin-top: 10px;
+        padding-bottom: 30px;
+    }
+
     .card-line-clamp {
+        font-size: 18px;
         line-height: 18px;
     }
 }

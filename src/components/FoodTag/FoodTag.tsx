@@ -22,19 +22,20 @@ const FoodTag: React.FC = () => {
 
   return (
     <div className="food-tag">
+      <h2>Categories</h2>
       <div className="food-tag__list">
-        <div onClick={changeActiveEl} className="food-tag__list__item active"><span><img src={spaghetti} alt="pasta" /></span></div>
-        <div onClick={changeActiveEl} className="food-tag__list__item"><span><img src={ham} alt="carne" /></span></div>
-        <div onClick={changeActiveEl} className="food-tag__list__item"><span><img src={carp} alt="pesce" /></span></div>
-        <div onClick={changeActiveEl} className="food-tag__list__item"><span><img src={healthyFood} alt="verdure" /></span></div>
-        <div onClick={changeActiveEl} className="food-tag__list__item"><span><img src={cake} alt="dolci" /></span></div>
-        <div onClick={changeActiveEl} className="food-tag__list__item"><span><img src={sushi} alt="giapponese" /></span></div>
-        <div onClick={changeActiveEl} className="food-tag__list__item"><span><img src={noodles} alt="cinese" /></span></div>
-        <div onClick={changeActiveEl} className="food-tag__list__item"><span><img src={taco} alt="messicano" /></span></div>
+        <div onClick={changeActiveEl} className="food-tag__list__item active"><span><img src={spaghetti} alt="pasta" /></span><p>Pasta</p></div>
+        <div onClick={changeActiveEl} className="food-tag__list__item"><span><img src={ham} alt="carne" /></span><p>Carne</p></div>
+        <div onClick={changeActiveEl} className="food-tag__list__item"><span><img src={carp} alt="pesce" /></span><p>Pesce</p></div>
+        <div onClick={changeActiveEl} className="food-tag__list__item"><span><img src={healthyFood} alt="verdure" /></span><p>Verdure</p></div>
+        <div onClick={changeActiveEl} className="food-tag__list__item"><span><img src={cake} alt="dolci" /></span><p>Dolci</p></div>
+        <div onClick={changeActiveEl} className="food-tag__list__item"><span><img src={sushi} alt="giapponese" /></span><p>Giapponese</p></div>
+        <div onClick={changeActiveEl} className="food-tag__list__item"><span><img src={noodles} alt="cinese" /></span><p>Cinese</p></div>
+        <div onClick={changeActiveEl} className="food-tag__list__item"><span><img src={taco} alt="messicano" /></span><p>Messicano</p></div>
       </div>
 
       {activeEl &&
-        <h2>{activeEl}</h2>
+        <p>{activeEl}</p>
       }
     </div>
   );
