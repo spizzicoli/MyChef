@@ -4,7 +4,6 @@ import App from './App'
 import { IonApp } from '@ionic/react'
 import { IonReactRouter } from '@ionic/react-router'
 import { Route } from 'react-router'
-
 import { Provider } from 'react-redux'
 import { createStore } from 'redux'
 import { devToolsEnhancer } from 'redux-devtools-extension'
