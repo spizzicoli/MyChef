@@ -1,11 +1,10 @@
 import { IonBackButton, IonButtons, IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react'
 import React from 'react'
-import { store } from '..'
 import Emoji from '../components/Emoji/Emoji'
 import Recipe from '../components/Recipe/Recipe'
 
 const FavouriteRecipes: React.FC = () => {
-  const recipes = store.getState()[0];
+  /*const recipes = store.getState()[0];
   let favRecipes,
       emptyFavRecipes;
 
@@ -17,8 +16,10 @@ const FavouriteRecipes: React.FC = () => {
   } else {
     emptyFavRecipes = true;
   }
+  */
 
-  return (
+  return ( <span>Ciao</span>
+    /*
     <IonPage>
       <IonHeader>
         <IonToolbar>
@@ -62,6 +63,7 @@ const FavouriteRecipes: React.FC = () => {
         </>}
       </IonContent>
     </IonPage>
+    */
   )
 }
 

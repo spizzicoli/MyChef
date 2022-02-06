@@ -1,45 +1,50 @@
 import { IonCard, IonCardHeader, IonCardSubtitle, IonCardTitle, IonCardContent, IonIcon, IonLabel, IonItem } from '@ionic/react'
 import { stopwatchOutline } from 'ionicons/icons'
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { store, addFavourite, removeFavourite } from '../..'
+import { useRecoilState } from 'recoil'
+import { recipeListState } from '../..'
 import Emoji from '../Emoji/Emoji'
 
 import './Recipe.scss'
 
-interface RecipeInterface {
+export interface RecipeInterface {
   idRecipe: number;
-  imgUrl: string;
+  imgUrl: any;
   title: string;
   time: string;
   favourite?: boolean;
   money: string;
   people: string;
+  summary: React.ReactNode;
 }
 
 const Recipe: React.FC<RecipeInterface> = props => {
   const urlRecipe: string = `/recipe-details/:${props.idRecipe}`;
   const [isFavourite, setIsFavourite] = useState<boolean>(props.favourite || false);
-  const [recipes, setRecipes] = useState(store.getState());
+  const [recipeList, setRecipeList] = useRecoilState<RecipeInterface[]>(recipeListState);
+  const [recipeToChange, setRecipeToChange] = useState<RecipeInterface>();
 
   const toggleToFavourite = () => {
-    const payload = props.idRecipe;
-    const recipeToChange = recipes.filter((recipe) => {
-      return recipe.id === payload;
-    });
-    const positionRecipeToChange = recipes.indexOf(recipeToChange[0]);
+    let recipeListUpdated;
 
-    // DISPATCH
-    // call a state change based on an action
-    if (isFavourite) {
-      store.dispatch(removeFavourite(payload));
-    } else {
-      store.dispatch(addFavourite(payload));
+    
+    // aggiorna lo stato del cuoricino
+    setIsFavourite(!isFavourite);
+
+    // inizializza la ricetta da cambiare dalla lista di ricette prese dallo stato
+    setRecipeToChange(recipeList.find((recipe) => recipe.idRecipe === props.idRecipe));
+
+    // se trova la ricetta da cambiare aggiorna il valore di favourite
+    if (recipeToChange) {
+      setRecipeToChange({...recipeToChange, favourite: !isFavourite});      
     }
 
-    // fatto il dispatch mi salvo il nuovo valore
-    //console.log('\n recipes: ', recipes, '\n recipesToChange: ', recipeToChange, '\n positionRecipeToChange: ', positionRecipeToChange);
-    setIsFavourite(recipes[positionRecipeToChange].favourite);
+    // prepara la ricetta aggiornata da salvare nello stato
+    recipeListUpdated = {...recipeList, recipeToChange};
+    console.log('\n\nrecipeList: ', recipeList, '\n\nrecipeToChange: ', recipeToChange, '\n\nrecipeListUpdated: ', recipeListUpdated);
+    // salva la ricetta aggiornata nello stato
+    setRecipeList(recipeListUpdated);
   }
 
   return (
@@ -67,7 +72,7 @@ const Recipe: React.FC<RecipeInterface> = props => {
         </IonCardSubtitle>
       </IonCardHeader>
 
-      <IonCardContent>{props.children}</IonCardContent>
+      <IonCardContent className="card-line-clamp">{props.summary}</IonCardContent>
     </IonCard>
   );
 }

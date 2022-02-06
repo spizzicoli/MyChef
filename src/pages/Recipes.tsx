@@ -1,27 +1,28 @@
 import { IonContent, IonPage } from '@ionic/react'
-import React, { useEffect, useState } from 'react'
-import Recipe from '../components/Recipe/Recipe'
+import React, { useEffect } from 'react'
+import Recipe, { RecipeInterface } from '../components/Recipe/Recipe'
 import FoodTag from '../components/FoodTag/FoodTag'
 import pizza1 from '../assets/images/pizza1.png'
 import pizza2 from '../assets/images/pizza2.png'
 import pizza3 from '../assets/images/pizza3.png'
 import pizza4 from '../assets/images/pizza4.png'
 import lineClamp from 'line-clamp'
-import { setInitialState, store } from '..'
 import Search from '../components/Search/Search'
 import Slider from 'react-slick'
+import { useRecoilState } from 'recoil'
+import { recipeListState } from '..'
 
 const Recipes: React.FC = () => {
   const API_KEY = "48dfa29ba0a34098ab1b0b70539db70a";
-  const [recipeList, setRecipeList] = useState<any>();
   const cardText = document.getElementsByClassName('card-line-clamp');
-  const settings = {
+  const sliderSettings = {
     infinite: true,
     speed: 500,
     beforeChange: (oldIndex, newIndex) => {
       console.log('\n\n hai fatto swipe!');
     },
   };
+  const [recipeList, setRecipeList] = useRecoilState<RecipeInterface[]>(recipeListState);
 
   /* GET method implementation
   async function getData(url = '') {
@@ -51,6 +52,54 @@ const Recipes: React.FC = () => {
   }, []);
   */
 
+  useEffect(() => {
+    // array di ricette che recupererò da un API
+    const recipesList: RecipeInterface[] = [
+      {
+        idRecipe: 1,
+        imgUrl: pizza1,
+        title: 'Peperoni cotto e olive',
+        time: '2h',
+        money: '20$',
+        people: '5 people',
+        summary: 'One of the most famous dish of Italian culture',
+        favourite: false
+      },
+      {
+        idRecipe: 2,
+        imgUrl: pizza2,
+        title: 'Capricciosa',
+        time: '2h',
+        money: '10$',
+        people: '5 people',
+        summary: 'One of the most famous dish of Italian culture',
+        favourite: true
+      },
+      {
+        idRecipe: 3,
+        imgUrl: pizza3,
+        title: 'Salame piccante',
+        time: '1h',
+        money: '35$',
+        people: '5 people',
+        summary: 'One of the most famous dish of Italian culture',
+        favourite: false
+      },
+      {
+        idRecipe: 4,
+        imgUrl: pizza4,
+        title: 'Vegetariana',
+        time: '1h',
+        money: '45$',
+        people: '5 people',
+        summary: 'One of the most famous dish of Italian culture',
+        favourite: false
+      }
+    ];
+
+    setRecipeList(recipesList);
+  }, []);
+
   let cardTextLoaded = setInterval(() => {
     if (cardText.length > 0) {
       clearInterval(cardTextLoaded);
@@ -63,74 +112,25 @@ const Recipes: React.FC = () => {
     }
   }, 500);
 
-  useEffect(() => {
-    const recipesList = [
-      {
-        id: '1',
-        image: pizza1,
-        title: 'Peperoni cotto e olive',
-        readyInMinutes: '2h',
-        pricePerServing: '20$',
-        servings: '5 people',
-        summary: 'One of the most famous dish of Italian culture',
-        favourite: false
-      },
-      {
-        id: '2',
-        image: pizza2,
-        title: 'Capricciosa',
-        readyInMinutes: '2h',
-        pricePerServing: '10$',
-        servings: '5 people',
-        summary: 'One of the most famous dish of Italian culture',
-        favourite: true
-      },
-      {
-        id: '3',
-        image: pizza3,
-        title: 'Salame piccante',
-        readyInMinutes: '1h',
-        pricePerServing: '35$',
-        servings: '5 people',
-        summary: 'One of the most famous dish of Italian culture',
-        favourite: false
-      },
-      {
-        id: '4',
-        image: pizza4,
-        title: 'Vegetariana',
-        readyInMinutes: '1h',
-        pricePerServing: '45$',
-        servings: '5 people',
-        summary: 'One of the most famous dish of Italian culture',
-        favourite: false
-      }
-    ];
-
-    setRecipeList(recipesList);
-    store.dispatch(setInitialState(recipeList));
-  }, []);
-
   return (
     <IonPage className="recipes-page">
       <IonContent className="ion-padding">
         <p className="page-title">What is your <br /> favourite recipe?</p>
         <Search></Search>
         <FoodTag></FoodTag>
-        <Slider {...settings}>
-          {recipeList &&
-            recipeList.map((recipe, key) => {
-              console.log('\n\nRICETTE: ', recipe)
+        <Slider {...sliderSettings}>
+          {recipeList && recipeList.length > 0 && recipeList.map((recipe, key) => {
+              console.log('\n\nRecipes: ', recipe)
               return <Recipe
                 key={key}
-                idRecipe={recipe.id}
-                imgUrl={recipe.image}
+                idRecipe={recipe.idRecipe}
+                imgUrl={recipe.imgUrl}
                 title={recipe.title}
-                time={recipe.readyInMinutes}
-                money={recipe.pricePerServing}
-                people={recipe.servings}
-                favourite={recipe.favourite}>
-                <div className="card-line-clamp" dangerouslySetInnerHTML={{ __html: recipe.summary }} />
+                time={recipe.time}
+                money={recipe.money}
+                people={recipe.people}
+                favourite={recipe.favourite}
+                summary={recipe.summary}>
               </Recipe>
             })
           }
