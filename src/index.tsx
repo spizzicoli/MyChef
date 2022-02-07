@@ -5,9 +5,9 @@ import { IonApp } from '@ionic/react'
 import { IonReactRouter } from '@ionic/react-router'
 import { Route } from 'react-router'
 import { atom, RecoilRoot } from 'recoil'
-import { RecipeInterface } from './components/Recipe/Recipe'
+import { RecipeItem } from './components/Recipe/Recipe'
 
-export const recipeListState = atom<RecipeInterface[]>({
+export const recipeListState = atom<RecipeItem[]>({
   key: 'recipeListState',
   default: [],
 });

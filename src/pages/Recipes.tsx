@@ -1,6 +1,6 @@
 import { IonContent, IonPage } from '@ionic/react'
 import React, { useEffect } from 'react'
-import Recipe, { RecipeInterface } from '../components/Recipe/Recipe'
+import Recipe, { RecipeItem } from '../components/Recipe/Recipe'
 import FoodTag from '../components/FoodTag/FoodTag'
 import pizza1 from '../assets/images/pizza1.png'
 import pizza2 from '../assets/images/pizza2.png'
@@ -22,7 +22,7 @@ const Recipes: React.FC = () => {
       console.log('\n\n hai fatto swipe!');
     },
   };
-  const [recipeList, setRecipeList] = useRecoilState<RecipeInterface[]>(recipeListState);
+  const [recipeList, setRecipeList] = useRecoilState<RecipeItem[]>(recipeListState);
 
   /* GET method implementation
   async function getData(url = '') {
@@ -54,7 +54,7 @@ const Recipes: React.FC = () => {
 
   useEffect(() => {
     // array di ricette che recupererò da un API
-    const recipesList: RecipeInterface[] = [
+    const recipesList: RecipeItem[] = [
       {
         idRecipe: 1,
         imgUrl: pizza1,
@@ -123,14 +123,7 @@ const Recipes: React.FC = () => {
               console.log('\n\nRecipes: ', recipe)
               return <Recipe
                 key={key}
-                idRecipe={recipe.idRecipe}
-                imgUrl={recipe.imgUrl}
-                title={recipe.title}
-                time={recipe.time}
-                money={recipe.money}
-                people={recipe.people}
-                favourite={recipe.favourite}
-                summary={recipe.summary}>
+                recipeItem={recipe}>
               </Recipe>
             })
           }
