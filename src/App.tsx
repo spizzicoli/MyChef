@@ -60,19 +60,19 @@ const App: React.FunctionComponent<RouteComponentProps> = () => {
         <IonTabBar slot="bottom">
           <IonTabButton tab="home" href="/home">
             <IonIcon icon={home} />
-            <IonLabel>Home</IonLabel>
+            {/*<IonLabel>Home</IonLabel>*/}
           </IonTabButton>
           <IonTabButton tab="recipes" href="/recipes">
             <IonIcon icon={restaurantOutline} />
-            <IonLabel>Recipes</IonLabel>
+            {/*<IonLabel>Recipes</IonLabel>*/}
           </IonTabButton>
           <IonTabButton tab="favourite recipes" href="/favourite-recipes">
             <IonIcon icon={heartOutline} />
-            <IonLabel>Favourite</IonLabel>
+            {/*<IonLabel>Favourite</IonLabel>*/}
           </IonTabButton>
           <IonTabButton tab="pantry" href="/pantry">
             <IonIcon icon={fastFoodOutline} />
-            <IonLabel>Pantry</IonLabel>
+            {/*<IonLabel>Pantry</IonLabel>*/}
           </IonTabButton>
         </IonTabBar>
       </IonTabs>

@@ -16,7 +16,7 @@ const User: React.FC<RouteComponentProps> = ({ location }) => {
         </IonToolbar>
       </IonHeader>
       <IonContent className="ion-padding">
-        <p>Hello darkness my old friend...{/*state?.name*/}</p>
+        <p>Suuuuuuuuuucaaa{/*state?.name*/}</p>
       </IonContent>
     </IonPage>
   )

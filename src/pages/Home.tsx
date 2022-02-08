@@ -22,7 +22,7 @@ const Home: React.FC<RouteComponentProps> = props => {
         </IonToolbar>
       </IonHeader>
       <IonContent className="ion-padding">
-        <p>A simple paragraph.</p>
+        <p>Vecchia Home, da modificare in seguito <br />mostrando un pò di ricette consigliate, mostrando le favorite, le ultime ricerche e cosi via, magari un'anteprima della dispensa..</p>
         <IonList>
           {users.map((user, i) => {
             return (

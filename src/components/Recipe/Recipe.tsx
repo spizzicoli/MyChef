@@ -1,9 +1,10 @@
-import { IonCard, IonCardHeader, IonCardSubtitle, IonCardTitle, IonCardContent, IonIcon, IonLabel, IonItem } from '@ionic/react'
+import { IonCard, IonCardHeader, IonCardSubtitle, IonCardTitle, IonCardContent, IonIcon, IonLabel } from '@ionic/react'
 import { stopwatchOutline } from 'ionicons/icons'
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useRecoilState } from 'recoil'
 import { recipeListState } from '../..'
+import { replaceItemAtIndex } from '../../utility/utility'
 import Emoji from '../Emoji/Emoji'
 
 import './Recipe.scss'
@@ -28,10 +29,6 @@ const Recipe: React.FC<RecipeInterface> = recipeItem => {
   const [recipeList, setRecipeList] = useRecoilState<RecipeItem[]>(recipeListState);
   const [isFavourite, setIsFavourite] = useState<boolean>(recipeItem.recipeItem.favourite || false);
   const recipeIndex = recipeList.findIndex((recipeListItem) => recipeListItem === recipeItem.recipeItem);
-
-  function replaceItemAtIndex(arr, index, newValue) {
-    return [...arr.slice(0, index), newValue, ...arr.slice(index + 1)];
-  }
 
   const toggleToFavourite = () => {
     const newRecipeList = replaceItemAtIndex(recipeList, recipeIndex, {
